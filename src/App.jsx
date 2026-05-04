@@ -60,10 +60,10 @@ function App() {
               rows={3}
             />
           </div>
-          
+
           {error && <div className="error-message">{error}</div>}
-          
-          <button 
+
+          <button
             className={`generate-btn ${isLoading ? 'loading' : ''}`}
             onClick={handleGenerate}
             disabled={isLoading}
@@ -93,7 +93,7 @@ function App() {
                       {idea.difficultyLevel}
                     </span>
                   </div>
-                  
+
                   <div className="card-content">
                     <div className="content-block">
                       <h3 className="block-title"><Target size={16} /> Problem Statement</h3>
@@ -129,10 +129,14 @@ function App() {
                       </div>
                     </div>
 
+
+
                     <div className="content-block">
                       <h3 className="block-title"><Settings size={16} /> Tech Enhancements</h3>
                       <p className="enhancements-text">{idea.suggestedTechEnhancements}</p>
                     </div>
+
+
                   </div>
                 </div>
               ))}
