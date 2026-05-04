@@ -2,7 +2,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-const genAI = new GoogleGenerativeAI(API_KEY || "YOUR_API_KEY_HERE");
+if (!import.meta.env.VITE_GEMINI_API_KEY) {
+  throw new Error("VITE_GEMINI_API_KEY is missing in environment variables");
+}
+
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 export async function generateIdeas(techStack) {
   if (!API_KEY) {
@@ -62,7 +66,7 @@ ${techStack}`;
   try {
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
-    
+
     // Extract JSON block in case the model wraps it in markdown code blocks
     let jsonString = responseText;
     const jsonMatch = responseText.match(/```json\n([\s\S]*?)\n```/);
@@ -71,7 +75,7 @@ ${techStack}`;
     } else {
       const genericMatch = responseText.match(/```\n([\s\S]*?)\n```/);
       if (genericMatch) {
-         jsonString = genericMatch[1];
+        jsonString = genericMatch[1];
       }
     }
 
