@@ -2,11 +2,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-if (!import.meta.env.VITE_GEMINI_API_KEY) {
-  throw new Error("VITE_GEMINI_API_KEY is missing in environment variables");
-}
+const genAI = new GoogleGenerativeAI(API_KEY || "YOUR_API_KEY_HERE");
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 export async function generateIdeas(techStack) {
   if (!API_KEY) {
